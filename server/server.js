@@ -31,6 +31,14 @@ app.get("/", (req, res) => {
     });
 });
 
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.json({
+        success: true,
+        status: "Server is healthy"
+    });
+});
+
 app.post("/register", async (req, res) => {
     const { username, password } = req.body;
 
