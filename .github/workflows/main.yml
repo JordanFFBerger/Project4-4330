@@ -1,8 +1,8 @@
-name: Flutter
+name: Flutter - 10 test builds
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "codex/ten-test-builds" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -12,24 +12,31 @@ permissions:
 
 jobs:
   build:
+    name: ${{ matrix.target }} - run ${{ matrix.repetition }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        target: [web, android]
+        repetition: [1, 2, 3, 4, 5]
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Java
+        if: matrix.target == 'android'
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           flutter-version: '3.47.2'
           channel: stable
-
-      - name: Initialize an empty Flutter repository
-        shell: bash
-        run: |
-          if [ ! -f pubspec.yaml ]; then
-            flutter create --project-name project4 --platforms web --no-pub .
-          fi
 
       - name: Install dependencies
         run: flutter pub get
@@ -41,4 +48,39 @@ jobs:
         run: flutter analyze
 
       - name: Run tests
-        run: flutter test
+        run: flutter test --coverage --test-randomize-ordering-seed=${{ matrix.repetition }}
+
+      - name: Build web
+        if: matrix.target == 'web'
+        run: flutter build web --release
+
+      - name: Build Android APK
+        if: matrix.target == 'android'
+        run: flutter build apk --debug
+
+      - name: Upload web build
+        if: matrix.target == 'web'
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-run-${{ matrix.repetition }}
+          path: build/web/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload Android APK
+        if: matrix.target == 'android'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-run-${{ matrix.repetition }}
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.target }}-${{ matrix.repetition }}
+          path: coverage/lcov.info
+          if-no-files-found: ignore
+          retention-days: 7

@@ -99,6 +99,18 @@ the recorded digest or crop.
 
 ## Verify
 
+GitHub Actions runs ten independent test/build jobs: five web release builds
+and five Android debug APK builds. Every job checks formatting, analyzes source,
+and runs the tests with a reproducible ordering seed (1–5) before building.
+Two jobs run at a time, and one failure does not cancel the remaining jobs.
+Build artifacts and available coverage reports are retained for seven days.
+These runs test build reliability and test-order dependence; they do not test
+camera, GPS, or AR behavior on physical phones.
+
+The workflow runs on pushes to `main` or `codex/ten-test-builds`, pull requests
+targeting `main`, and manual workflow dispatches. Open the repository's Actions
+tab and select **Flutter - 10 test builds** to view runs and download artifacts.
+
 ```sh
 dart format --output=none --set-exit-if-changed lib test
 flutter analyze
