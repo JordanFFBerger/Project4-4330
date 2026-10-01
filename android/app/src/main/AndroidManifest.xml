@@ -5,6 +5,7 @@
         android:label="PFT Explorer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.ar.core" android:value="optional" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

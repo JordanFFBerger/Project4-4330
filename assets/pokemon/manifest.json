@@ -1,0 +1,1107 @@
+{
+  "sourceCommit": "429de1288cea0d43f5b4f56305d2276e94239d65",
+  "models": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "file": "1.glb",
+      "url": "assets/pokemon/1.glb",
+      "bytes": 1387068,
+      "sha256": "fb40bdf3f87940ce70c73676c5c1e629f06efb6d769da6efa22f15b258f24593",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/1.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "model_skeleton|001aidle",
+          "durationSeconds": 1.6666666269302368,
+          "channels": 169
+        },
+        {
+          "index": 1,
+          "name": "model_skeleton|001fight_b",
+          "durationSeconds": 1.75,
+          "channels": 169
+        },
+        {
+          "index": 2,
+          "name": "model_skeleton|001fight_d",
+          "durationSeconds": 2.625,
+          "channels": 169
+        },
+        {
+          "index": 3,
+          "name": "model_skeleton|001jump_e",
+          "durationSeconds": 0.75,
+          "channels": 169
+        },
+        {
+          "index": 4,
+          "name": "model_skeleton|001jump_l",
+          "durationSeconds": 0.75,
+          "channels": 169
+        },
+        {
+          "index": 5,
+          "name": "model_skeleton|001jump_s",
+          "durationSeconds": 0.5416666865348816,
+          "channels": 169
+        },
+        {
+          "index": 6,
+          "name": "model_skeleton|001ko",
+          "durationSeconds": 2,
+          "channels": 169
+        },
+        {
+          "index": 7,
+          "name": "model_skeleton|001run",
+          "durationSeconds": 0.375,
+          "channels": 169
+        },
+        {
+          "index": 8,
+          "name": "model_skeleton|001walk",
+          "durationSeconds": 1.1666666269302368,
+          "channels": 169
+        }
+      ],
+      "originalSha256": "f858e644251443d4011ef4b3c01f119d732307a3e6658c6cc60db51fd4e72eb4",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 6,
+      "name": "Charizard",
+      "file": "6.glb",
+      "url": "assets/pokemon/6.glb",
+      "bytes": 631956,
+      "sha256": "68396887ca3dcf5e2579c362c8ed3c50e29eae1ac96fd311ea46c0622e800cd4",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/6.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Chariard_dizzy",
+          "durationSeconds": 4.291666507720947,
+          "channels": 216
+        }
+      ],
+      "originalSha256": "1dc18de231df4ba6fcc2c2ee9f9d483c2f33478bca52cf83357a5c9188c3076e",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "file": "25.glb",
+      "url": "assets/pokemon/25.glb",
+      "bytes": 385572,
+      "sha256": "ae3e3734aafd663527295d9d0d4a95bbce52bd576e14724de6b21e6b41af0f87",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/25.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Impactrueno",
+          "durationSeconds": 4.5,
+          "channels": 135
+        }
+      ],
+      "originalSha256": "6c09be51ffcf8caf45ae0980c9e11a0e963fc6fdbf111a200910982ba9bf8b2c",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 93,
+      "name": "Haunter",
+      "file": "93.glb",
+      "url": "assets/pokemon/93.glb",
+      "bytes": 260076,
+      "sha256": "b0cd84b6364cc982c8b9edb9efbc96b48e54cf3e6404477a302f345cfe978283",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/93.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Animation",
+          "durationSeconds": 3.3333332538604736,
+          "channels": 2
+        }
+      ],
+      "originalSha256": "8397b786234f5048fcc378e1279fc096a94558ee5ee2d7f356cf266794758dbd",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 95,
+      "name": "Onix",
+      "file": "95.glb",
+      "url": "assets/pokemon/95.glb",
+      "bytes": 4058984,
+      "sha256": "3eeb25e80edcb1f464bb8763b7cb149814d6342f18fb73c9b95cba76a4d68499",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/95.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Take 001",
+          "durationSeconds": 5.666666507720947,
+          "channels": 40
+        }
+      ],
+      "originalSha256": "c6c74802fbe86b160ae20802c829131b145cea4793df66a22d035c6bc2d740d9",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 132,
+      "name": "Ditto",
+      "file": "132.glb",
+      "url": "assets/pokemon/132.glb",
+      "bytes": 258004,
+      "sha256": "77ab472da431758480e7e54842e79f0d6c5e54c19321b8ae7f7e661adab8b783",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/132.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Dancing",
+          "durationSeconds": 0.6333333253860474,
+          "channels": 38
+        }
+      ],
+      "originalSha256": "b5b46d5618ba46108ad1e3d92d388c93477e9e0aec4916eee0cec9a25623431a",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 133,
+      "name": "Eevee",
+      "file": "133.glb",
+      "url": "assets/pokemon/133.glb",
+      "bytes": 404840,
+      "sha256": "93e80d7a395f3026add3e66fcb7521ec4642d03d0d2ab3edc87cf165895d19ce",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/133.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Armature|ArmatureAction",
+          "durationSeconds": 4.125,
+          "channels": 107
+        }
+      ],
+      "originalSha256": "f0c8eb0876da64ac4e6f62de361b2362fb8dd45168e89903c6bda026be0ef40c",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 134,
+      "name": "Vaporeon",
+      "file": "134.glb",
+      "url": "assets/pokemon/134.glb",
+      "bytes": 511804,
+      "sha256": "a9fd383be460d91ca0d21692fdaa754ef62ee5ed6455971aad6fe50b6c0988a4",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/134.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Armature|ArmatureAction",
+          "durationSeconds": 5.541666507720947,
+          "channels": 118
+        }
+      ],
+      "originalSha256": "44101789d8141a5435b1a0660c90da30ae10bb05d932093000a95e7140e43399",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 135,
+      "name": "Jolteon",
+      "file": "135.glb",
+      "url": "assets/pokemon/135.glb",
+      "bytes": 447892,
+      "sha256": "001760997fd9e2b854f6e7e6187f61750b4f67010b1d6af5a8db32066c35bcc1",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/135.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Armature|ArmatureAction",
+          "durationSeconds": 6.333333492279053,
+          "channels": 126
+        }
+      ],
+      "originalSha256": "4c745afc675f66cd17259cea1325b684bf2b17c8162c3246935b9857c69d2faf",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 136,
+      "name": "Flareon",
+      "file": "136.glb",
+      "url": "assets/pokemon/136.glb",
+      "bytes": 516652,
+      "sha256": "fd642b5c23f27b907aa2979b3c0d507bae251aeaea2ad8f665886b7dde838950",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/136.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Armature|ArmatureAction",
+          "durationSeconds": 5.666666507720947,
+          "channels": 98
+        }
+      ],
+      "originalSha256": "8f7bfd8fe7e8eb719a569ca9f660951acf373423fd2eef2a0d6e0e84fb5a0762",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 146,
+      "name": "Moltres",
+      "file": "146.glb",
+      "url": "assets/pokemon/146.glb",
+      "bytes": 824276,
+      "sha256": "a3aeefa02366140075a658b4fcc7b2ff9c8be9a012c8ca1b73873e53f4b02dce",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/146.glb",
+      "requiredExtensions": [
+        "KHR_texture_transform"
+      ],
+      "animations": [
+        {
+          "index": 0,
+          "name": "faiyaa_10|bd_appear|Base Layer",
+          "durationSeconds": 1.6799999475479126,
+          "channels": 66
+        },
+        {
+          "index": 1,
+          "name": "PT_head|bd_appearloop|Base Layer",
+          "durationSeconds": 2.680000066757202,
+          "channels": 3
+        }
+      ],
+      "originalSha256": "b5df8d4f7188211551d3d4a806224db35d547adf46abf7762584feb8854bbfb2",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 149,
+      "name": "Dragonite",
+      "file": "149.glb",
+      "url": "assets/pokemon/149.glb",
+      "bytes": 6789344,
+      "sha256": "f34437f36e23ee3e5df8a30eb0d9485aeaad334b6570d215ba193bc49b6b6a70",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/149.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "pm0149_00_00_00000_defaultwait01_loop",
+          "durationSeconds": 2.5166666507720947,
+          "channels": 200
+        },
+        {
+          "index": 1,
+          "name": "pm0149_00_00_00010_defaultidle01",
+          "durationSeconds": 3.0166666507720947,
+          "channels": 198
+        },
+        {
+          "index": 2,
+          "name": "pm0149_00_00_00021_turn_r090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 201
+        },
+        {
+          "index": 3,
+          "name": "pm0149_00_00_00024_turn_l090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 198
+        },
+        {
+          "index": 4,
+          "name": "pm0149_00_00_00030_walk01_loop",
+          "durationSeconds": 1.5833333730697632,
+          "channels": 201
+        },
+        {
+          "index": 5,
+          "name": "pm0149_00_00_00100_run01_loop",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 198
+        },
+        {
+          "index": 6,
+          "name": "pm0149_00_00_00150_jumpup01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 201
+        },
+        {
+          "index": 7,
+          "name": "pm0149_00_00_00151_jumpup01_loop",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 201
+        },
+        {
+          "index": 8,
+          "name": "pm0149_00_00_00152_jumpdown01_start",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 201
+        },
+        {
+          "index": 9,
+          "name": "pm0149_00_00_00153_jumpdown01_loop",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 197
+        },
+        {
+          "index": 10,
+          "name": "pm0149_00_00_00155_land02",
+          "durationSeconds": 0.7166666388511658,
+          "channels": 202
+        },
+        {
+          "index": 11,
+          "name": "pm0149_00_00_00270_rest01_start",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 199
+        },
+        {
+          "index": 12,
+          "name": "pm0149_00_00_00271_rest01_loop",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 196
+        },
+        {
+          "index": 13,
+          "name": "pm0149_00_00_00272_rest01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 197
+        },
+        {
+          "index": 14,
+          "name": "pm0149_00_00_00280_sleep01_start",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 193
+        },
+        {
+          "index": 15,
+          "name": "pm0149_00_00_00281_sleep01_loop",
+          "durationSeconds": 2.683333396911621,
+          "channels": 199
+        },
+        {
+          "index": 16,
+          "name": "pm0149_00_00_00282_sleep01_end",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 201
+        },
+        {
+          "index": 17,
+          "name": "pm0149_00_00_00290_eat01_start",
+          "durationSeconds": 0.3499999940395355,
+          "channels": 202
+        },
+        {
+          "index": 18,
+          "name": "pm0149_00_00_00291_eat01_loop",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 201
+        },
+        {
+          "index": 19,
+          "name": "pm0149_00_00_00292_eat01_end",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 201
+        },
+        {
+          "index": 20,
+          "name": "pm0149_00_00_00293_eat02_start",
+          "durationSeconds": 1.1833332777023315,
+          "channels": 199
+        },
+        {
+          "index": 21,
+          "name": "pm0149_00_00_00294_eat02_loop",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 200
+        },
+        {
+          "index": 22,
+          "name": "pm0149_00_00_00295_eat02_end",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 201
+        },
+        {
+          "index": 23,
+          "name": "pm0149_00_00_00300_roar01",
+          "durationSeconds": 2.683333396911621,
+          "channels": 201
+        },
+        {
+          "index": 24,
+          "name": "pm0149_00_00_00320_refresh01",
+          "durationSeconds": 2.3499999046325684,
+          "channels": 200
+        },
+        {
+          "index": 25,
+          "name": "pm0149_00_00_00550_glad01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 199
+        },
+        {
+          "index": 26,
+          "name": "pm0149_00_00_00560_notice01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 195
+        },
+        {
+          "index": 27,
+          "name": "pm0149_00_00_00563_hate01",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 200
+        },
+        {
+          "index": 28,
+          "name": "pm0149_00_00_20000_defaultwait01_loop",
+          "durationSeconds": 1.5166666507720947,
+          "channels": 203
+        },
+        {
+          "index": 29,
+          "name": "pm0149_00_00_20001_battlewait01_loop",
+          "durationSeconds": 1.5166666507720947,
+          "channels": 201
+        },
+        {
+          "index": 30,
+          "name": "pm0149_00_00_20010_defaultidle01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 198
+        },
+        {
+          "index": 31,
+          "name": "pm0149_00_00_20011_defaultidle02",
+          "durationSeconds": 2.183333396911621,
+          "channels": 200
+        },
+        {
+          "index": 32,
+          "name": "pm0149_00_00_20021_turn_r090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 199
+        },
+        {
+          "index": 33,
+          "name": "pm0149_00_00_20024_turn_l090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 201
+        },
+        {
+          "index": 34,
+          "name": "pm0149_00_00_20030_walk01_loop",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 203
+        },
+        {
+          "index": 35,
+          "name": "pm0149_00_00_20100_run01_loop",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 199
+        },
+        {
+          "index": 36,
+          "name": "pm0149_00_00_20145_stepout01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 202
+        },
+        {
+          "index": 37,
+          "name": "pm0149_00_00_20146_stepout01",
+          "durationSeconds": 0.25,
+          "channels": 201
+        },
+        {
+          "index": 38,
+          "name": "pm0149_00_00_20147_stepout01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 198
+        },
+        {
+          "index": 39,
+          "name": "pm0149_00_00_20150_jumpup01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 201
+        },
+        {
+          "index": 40,
+          "name": "pm0149_00_00_20151_jumpup01_loop",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 200
+        },
+        {
+          "index": 41,
+          "name": "pm0149_00_00_20152_jumpdown01_start",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 201
+        },
+        {
+          "index": 42,
+          "name": "pm0149_00_00_20153_jumpdown01_loop",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 198
+        },
+        {
+          "index": 43,
+          "name": "pm0149_00_00_20155_land02",
+          "durationSeconds": 0.7166666388511658,
+          "channels": 200
+        },
+        {
+          "index": 44,
+          "name": "pm0149_00_00_20300_roar01",
+          "durationSeconds": 2.683333396911621,
+          "channels": 199
+        },
+        {
+          "index": 45,
+          "name": "pm0149_00_00_20400_attack01",
+          "durationSeconds": 2.183333396911621,
+          "channels": 200
+        },
+        {
+          "index": 46,
+          "name": "pm0149_00_00_20410_attack02",
+          "durationSeconds": 2.5166666507720947,
+          "channels": 202
+        },
+        {
+          "index": 47,
+          "name": "pm0149_00_00_20450_rangeattack01",
+          "durationSeconds": 2.7166666984558105,
+          "channels": 199
+        },
+        {
+          "index": 48,
+          "name": "pm0149_00_00_20460_rangeattack02_start",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 200
+        },
+        {
+          "index": 49,
+          "name": "pm0149_00_00_20461_rangeattack02_loop",
+          "durationSeconds": 0.6499999761581421,
+          "channels": 201
+        },
+        {
+          "index": 50,
+          "name": "pm0149_00_00_20462_rangeattack02_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 200
+        },
+        {
+          "index": 51,
+          "name": "pm0149_00_00_20500_damage01",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 202
+        },
+        {
+          "index": 52,
+          "name": "pm0149_00_00_20501_damage02",
+          "durationSeconds": 1.1833332777023315,
+          "channels": 202
+        },
+        {
+          "index": 53,
+          "name": "pm0149_00_00_20510_stun01_start",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 202
+        },
+        {
+          "index": 54,
+          "name": "pm0149_00_00_20511_stun01_loop",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 201
+        },
+        {
+          "index": 55,
+          "name": "pm0149_00_00_20512_stun01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 202
+        },
+        {
+          "index": 56,
+          "name": "pm0149_00_00_20520_down01_start",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 200
+        },
+        {
+          "index": 57,
+          "name": "pm0149_00_00_20521_down01_loop",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 198
+        },
+        {
+          "index": 58,
+          "name": "pm0149_00_00_20522_down01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 199
+        },
+        {
+          "index": 59,
+          "name": "pm0149_00_00_20560_notice01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 201
+        },
+        {
+          "index": 60,
+          "name": "pm0149_00_00_28000_eye01",
+          "durationSeconds": 0.3499999940395355,
+          "channels": 42
+        },
+        {
+          "index": 61,
+          "name": "pm0149_00_00_28100_mouth01",
+          "durationSeconds": 0.3499999940395355,
+          "channels": 27
+        }
+      ],
+      "originalSha256": "becaa8098e26676837dd2f19589a16c774e46b433118b9d911cc7876abbe36b8",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    },
+    {
+      "id": 150,
+      "name": "Mewtwo",
+      "file": "150.glb",
+      "url": "assets/pokemon/150.glb",
+      "bytes": 8334256,
+      "sha256": "255a3a3141c8f362da49f30257199ed1ea626545f61c9717e1d2cb3744c7723e",
+      "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/150.glb",
+      "requiredExtensions": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "pm0150_00_00_00000_defaultwait01_loop",
+          "durationSeconds": 3.0166666507720947,
+          "channels": 219
+        },
+        {
+          "index": 1,
+          "name": "pm0150_00_00_00001_battlewait01_loop",
+          "durationSeconds": 3.0166666507720947,
+          "channels": 220
+        },
+        {
+          "index": 2,
+          "name": "pm0150_00_00_00010_defaultidle01",
+          "durationSeconds": 3.0166666507720947,
+          "channels": 224
+        },
+        {
+          "index": 3,
+          "name": "pm0150_00_00_00011_defaultidle02",
+          "durationSeconds": 3.6500000953674316,
+          "channels": 225
+        },
+        {
+          "index": 4,
+          "name": "pm0150_00_00_00021_turn_r090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 225
+        },
+        {
+          "index": 5,
+          "name": "pm0150_00_00_00024_turn_l090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 224
+        },
+        {
+          "index": 6,
+          "name": "pm0150_00_00_00030_walk01_loop",
+          "durationSeconds": 1.6166666746139526,
+          "channels": 220
+        },
+        {
+          "index": 7,
+          "name": "pm0150_00_00_00100_run01_loop",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 217
+        },
+        {
+          "index": 8,
+          "name": "pm0150_00_00_00145_stepout01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 221
+        },
+        {
+          "index": 9,
+          "name": "pm0150_00_00_00146_stepout01",
+          "durationSeconds": 0.25,
+          "channels": 225
+        },
+        {
+          "index": 10,
+          "name": "pm0150_00_00_00147_stepout01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 226
+        },
+        {
+          "index": 11,
+          "name": "pm0150_00_00_00150_jumpup01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 220
+        },
+        {
+          "index": 12,
+          "name": "pm0150_00_00_00151_jumpup01_loop",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 221
+        },
+        {
+          "index": 13,
+          "name": "pm0150_00_00_00152_jumpdown01_start",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 225
+        },
+        {
+          "index": 14,
+          "name": "pm0150_00_00_00153_jumpdown01_loop",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 219
+        },
+        {
+          "index": 15,
+          "name": "pm0150_00_00_00155_land02",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 225
+        },
+        {
+          "index": 16,
+          "name": "pm0150_00_00_00280_sleep01_start",
+          "durationSeconds": 1.350000023841858,
+          "channels": 224
+        },
+        {
+          "index": 17,
+          "name": "pm0150_00_00_00281_sleep01_loop",
+          "durationSeconds": 2.3499999046325684,
+          "channels": 224
+        },
+        {
+          "index": 18,
+          "name": "pm0150_00_00_00282_sleep01_end",
+          "durationSeconds": 1.350000023841858,
+          "channels": 226
+        },
+        {
+          "index": 19,
+          "name": "pm0150_00_00_00290_eat01_start",
+          "durationSeconds": 0.5166666507720947,
+          "channels": 221
+        },
+        {
+          "index": 20,
+          "name": "pm0150_00_00_00291_eat01_loop",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 220
+        },
+        {
+          "index": 21,
+          "name": "pm0150_00_00_00292_eat01_end",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 224
+        },
+        {
+          "index": 22,
+          "name": "pm0150_00_00_00300_roar01",
+          "durationSeconds": 2.3499999046325684,
+          "channels": 222
+        },
+        {
+          "index": 23,
+          "name": "pm0150_00_00_00320_refresh01",
+          "durationSeconds": 2.183333396911621,
+          "channels": 220
+        },
+        {
+          "index": 24,
+          "name": "pm0150_00_00_00400_attack01",
+          "durationSeconds": 2.183333396911621,
+          "channels": 217
+        },
+        {
+          "index": 25,
+          "name": "pm0150_00_00_00410_attack02",
+          "durationSeconds": 2.5166666507720947,
+          "channels": 226
+        },
+        {
+          "index": 26,
+          "name": "pm0150_00_00_00450_rangeattack01",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 220
+        },
+        {
+          "index": 27,
+          "name": "pm0150_00_00_00460_rangeattack02_start",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 224
+        },
+        {
+          "index": 28,
+          "name": "pm0150_00_00_00461_rangeattack02_loop",
+          "durationSeconds": 0.6499999761581421,
+          "channels": 217
+        },
+        {
+          "index": 29,
+          "name": "pm0150_00_00_00462_rangeattack02_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 224
+        },
+        {
+          "index": 30,
+          "name": "pm0150_00_00_00500_damage01",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 224
+        },
+        {
+          "index": 31,
+          "name": "pm0150_00_00_00501_damage02",
+          "durationSeconds": 1.350000023841858,
+          "channels": 224
+        },
+        {
+          "index": 32,
+          "name": "pm0150_00_00_00510_stun01_start",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 225
+        },
+        {
+          "index": 33,
+          "name": "pm0150_00_00_00511_stun01_loop",
+          "durationSeconds": 1.5166666507720947,
+          "channels": 227
+        },
+        {
+          "index": 34,
+          "name": "pm0150_00_00_00512_stun01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 226
+        },
+        {
+          "index": 35,
+          "name": "pm0150_00_00_00520_down01_start",
+          "durationSeconds": 1.850000023841858,
+          "channels": 225
+        },
+        {
+          "index": 36,
+          "name": "pm0150_00_00_00521_down01_loop",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 223
+        },
+        {
+          "index": 37,
+          "name": "pm0150_00_00_00522_down01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 225
+        },
+        {
+          "index": 38,
+          "name": "pm0150_00_00_00550_glad01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 203
+        },
+        {
+          "index": 39,
+          "name": "pm0150_00_00_00560_notice01",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 222
+        },
+        {
+          "index": 40,
+          "name": "pm0150_00_00_00563_hate01",
+          "durationSeconds": 2.049999952316284,
+          "channels": 222
+        },
+        {
+          "index": 41,
+          "name": "pm0150_00_00_08000_eye01",
+          "durationSeconds": 0.3499999940395355,
+          "channels": 29
+        },
+        {
+          "index": 42,
+          "name": "pm0150_00_00_08100_mouth01",
+          "durationSeconds": 0.3499999940395355,
+          "channels": 5
+        },
+        {
+          "index": 43,
+          "name": "pm0150_00_00_20000_defaultwait01_loop",
+          "durationSeconds": 3.0166666507720947,
+          "channels": 219
+        },
+        {
+          "index": 44,
+          "name": "pm0150_00_00_20010_defaultidle01",
+          "durationSeconds": 4.016666889190674,
+          "channels": 221
+        },
+        {
+          "index": 45,
+          "name": "pm0150_00_00_20021_turn_r090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 224
+        },
+        {
+          "index": 46,
+          "name": "pm0150_00_00_20024_turn_l090",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 224
+        },
+        {
+          "index": 47,
+          "name": "pm0150_00_00_20030_walk01_loop",
+          "durationSeconds": 1.5166666507720947,
+          "channels": 225
+        },
+        {
+          "index": 48,
+          "name": "pm0150_00_00_20100_run01_loop",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 218
+        },
+        {
+          "index": 49,
+          "name": "pm0150_00_00_20145_stepout01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 219
+        },
+        {
+          "index": 50,
+          "name": "pm0150_00_00_20146_stepout01",
+          "durationSeconds": 0.25,
+          "channels": 220
+        },
+        {
+          "index": 51,
+          "name": "pm0150_00_00_20147_stepout01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 223
+        },
+        {
+          "index": 52,
+          "name": "pm0150_00_00_20150_jumpup01_start",
+          "durationSeconds": 0.11666666716337204,
+          "channels": 222
+        },
+        {
+          "index": 53,
+          "name": "pm0150_00_00_20151_jumpup01_loop",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 220
+        },
+        {
+          "index": 54,
+          "name": "pm0150_00_00_20152_jumpdown01_start",
+          "durationSeconds": 0.4166666567325592,
+          "channels": 217
+        },
+        {
+          "index": 55,
+          "name": "pm0150_00_00_20153_jumpdown01_loop",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 218
+        },
+        {
+          "index": 56,
+          "name": "pm0150_00_00_20155_land02",
+          "durationSeconds": 0.8500000238418579,
+          "channels": 227
+        },
+        {
+          "index": 57,
+          "name": "pm0150_00_00_20300_roar01",
+          "durationSeconds": 2.3499999046325684,
+          "channels": 222
+        },
+        {
+          "index": 58,
+          "name": "pm0150_00_00_20400_attack01",
+          "durationSeconds": 2.183333396911621,
+          "channels": 223
+        },
+        {
+          "index": 59,
+          "name": "pm0150_00_00_20460_rangeattack02_start",
+          "durationSeconds": 0.7833333611488342,
+          "channels": 224
+        },
+        {
+          "index": 60,
+          "name": "pm0150_00_00_20461_rangeattack02_loop",
+          "durationSeconds": 0.7833333611488342,
+          "channels": 220
+        },
+        {
+          "index": 61,
+          "name": "pm0150_00_00_20462_rangeattack02_end",
+          "durationSeconds": 1.1833332777023315,
+          "channels": 219
+        },
+        {
+          "index": 62,
+          "name": "pm0150_00_00_20500_damage01",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 225
+        },
+        {
+          "index": 63,
+          "name": "pm0150_00_00_20501_damage02",
+          "durationSeconds": 1.1833332777023315,
+          "channels": 222
+        },
+        {
+          "index": 64,
+          "name": "pm0150_00_00_20510_stun01_start",
+          "durationSeconds": 0.6833333373069763,
+          "channels": 223
+        },
+        {
+          "index": 65,
+          "name": "pm0150_00_00_20511_stun01_loop",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 221
+        },
+        {
+          "index": 66,
+          "name": "pm0150_00_00_20512_stun01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 223
+        },
+        {
+          "index": 67,
+          "name": "pm0150_00_00_20520_down01_start",
+          "durationSeconds": 1.6833332777023315,
+          "channels": 226
+        },
+        {
+          "index": 68,
+          "name": "pm0150_00_00_20521_down01_loop",
+          "durationSeconds": 2.0166666507720947,
+          "channels": 221
+        },
+        {
+          "index": 69,
+          "name": "pm0150_00_00_20522_down01_end",
+          "durationSeconds": 1.0166666507720947,
+          "channels": 223
+        },
+        {
+          "index": 70,
+          "name": "pm0150_00_00_20560_notice01",
+          "durationSeconds": 2.3499999046325684,
+          "channels": 223
+        }
+      ],
+      "originalSha256": "98ed03ce2dda7979f0ef0edf804671a3c3823a495dbe7fd230386122ebf77e69",
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+    }
+  ]
+}

@@ -120,3 +120,7 @@ flutter build web
 
 Tests cover map-image dimensions, valid coordinates, floor isolation, searching
 across floors, placement after zoom/pan, encounter callbacks, and small screens.
+
+## Android Pokémon prototype
+
+See [Android setup and phone testing](ANDROID_TESTING.md) for marker printing, saved map placements, and AR testing. The home screen includes **Set up Pokémon AR**. iOS scanning is not enabled yet.

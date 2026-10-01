@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'map/pft_map_screen.dart';
+import 'ar/station_setup_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,15 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            ElevatedButton.icon(
+              icon: const Icon(Icons.view_in_ar),
+              label: const Text('Set up Pokémon AR'),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const StationSetupScreen(),
+                ),
+              ),
+            ),
             ElevatedButton.icon(
               icon: const Icon(Icons.map_outlined),
               label: const Text('Open PFT Map'),
