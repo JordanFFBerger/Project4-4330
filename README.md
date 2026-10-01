@@ -1,8 +1,3 @@
-# Project 4 - PFT Explorer
-
-Flutter app for the CSC 4330 team's Pokemon/AR project at LSU. This branch adds
-Gavin's PFT map to Chloe's `Chloe-camera` home screen and camera foundation.
-
 ## Run
 
 Use Flutter 3.47.2 or newer with Dart 3.13.2 or newer:
