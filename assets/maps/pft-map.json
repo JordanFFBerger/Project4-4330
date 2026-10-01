@@ -1,0 +1,40 @@
+{
+  "building": "Patrick F. Taylor Hall, LSU",
+  "coordinateSystem": "image-normalized-top-left",
+  "source": {
+    "title": "LSU College of Engineering - Building Guide for Patrick F. Taylor Hall",
+    "url": "https://www.lsu.edu/eng/images/pft_floorplan_guide2_webupdated2021.pdf",
+    "publicationYear": 2021,
+    "pages": [2, 3, 4],
+    "cropAt4000PixelPageWidth": {"x": 1380, "y": 80, "width": 2520, "height": 2300},
+    "landmarks": "Approximate positions read from the guide. Verify current room names and access on site."
+  },
+  "floors": [
+    {"id": 1, "label": "1st floor", "description": "Commons, classrooms & teaching labs", "asset": "assets/maps/pft-floor-1.png", "width": 2520, "height": 2300},
+    {"id": 2, "label": "2nd floor", "description": "Student services & research labs", "asset": "assets/maps/pft-floor-2.png", "width": 2520, "height": 2300},
+    {"id": 3, "label": "3rd floor", "description": "Department suites & offices", "asset": "assets/maps/pft-floor-3.png", "width": 2520, "height": 2300}
+  ],
+  "landmarks": [
+    {"id": "f1-commons", "name": "The Commons", "kind": "landmark", "floor": 1, "x": 0.250, "y": 0.405, "description": "First-floor gathering space."},
+    {"id": "f1-gallery", "name": "Capstone Gallery", "kind": "landmark", "floor": 1, "x": 0.684, "y": 0.393, "description": "Gallery beside the central stairs."},
+    {"id": "f1-atrium", "name": "Cambre Atrium", "kind": "landmark", "floor": 1, "x": 0.365, "y": 0.761, "description": "Connects the main building and chemical engineering wing."},
+    {"id": "f1-east-entry", "name": "Main entrance", "kind": "entrance", "floor": 1, "x": 0.889, "y": 0.391, "description": "Entrance facing South Quad Drive."},
+    {"id": "f1-robotics", "name": "Robotics Lab", "kind": "lab", "room": "1300", "floor": 1, "x": 0.821, "y": 0.344, "description": "Room location shown for reference; access depends on the lab."},
+    {"id": "f1-chevron", "name": "Chevron Center", "kind": "landmark", "room": "1269", "floor": 1, "x": 0.820, "y": 0.449, "description": "Center for Engineering Education."},
+    {"id": "f1-main-lifts", "name": "Main elevators", "kind": "elevator", "floor": 1, "x": 0.493, "y": 0.346, "description": "Elevators between the Commons and gallery."},
+    {"id": "f1-annex-lift", "name": "Annex elevator", "kind": "elevator", "floor": 1, "x": 0.490, "y": 0.823, "description": "Elevator in the chemical engineering wing."},
+    {"id": "f2-student-services", "name": "Student Services", "kind": "landmark", "room": "2228", "floor": 2, "x": 0.804, "y": 0.446, "description": "Brookshire Student Services reception."},
+    {"id": "f2-bim", "name": "BIM Lab", "kind": "lab", "room": "2348", "floor": 2, "x": 0.447, "y": 0.310, "description": "Building Information Modeling Lab; room access may be restricted."},
+    {"id": "f2-simulation", "name": "Civil Simulation Lab", "kind": "lab", "room": "2215", "floor": 2, "x": 0.584, "y": 0.480, "description": "Room location shown for reference; access depends on the lab."},
+    {"id": "f2-main-lifts", "name": "Main elevators", "kind": "elevator", "floor": 2, "x": 0.495, "y": 0.337, "description": "Elevators between the Commons and gallery."},
+    {"id": "f2-annex-lift", "name": "Annex elevator", "kind": "elevator", "floor": 2, "x": 0.509, "y": 0.819, "description": "Elevator in the chemical engineering wing."},
+    {"id": "f3-ece-cs", "name": "ECE & Computer Science", "kind": "office", "room": "3325", "floor": 3, "x": 0.298, "y": 0.292, "description": "Department suite."},
+    {"id": "f3-cm", "name": "Construction Management", "kind": "office", "room": "3319", "floor": 3, "x": 0.427, "y": 0.300, "description": "Department suite."},
+    {"id": "f3-cheme", "name": "Chemical Engineering", "kind": "office", "room": "3307", "floor": 3, "x": 0.638, "y": 0.299, "description": "Department suite."},
+    {"id": "f3-me-ie", "name": "Mechanical & Industrial", "kind": "office", "room": "3261", "floor": 3, "x": 0.301, "y": 0.489, "description": "Department suite."},
+    {"id": "f3-ce", "name": "Civil & Environmental", "kind": "office", "room": "3255", "floor": 3, "x": 0.430, "y": 0.475, "description": "Department suite."},
+    {"id": "f3-pete", "name": "Petroleum Engineering", "kind": "office", "room": "3207", "floor": 3, "x": 0.638, "y": 0.475, "description": "Department suite."},
+    {"id": "f3-main-lifts", "name": "Main elevators", "kind": "elevator", "floor": 3, "x": 0.506, "y": 0.346, "description": "Elevators between the Commons and gallery."},
+    {"id": "f3-annex-lift", "name": "Annex elevator", "kind": "elevator", "floor": 3, "x": 0.516, "y": 0.818, "description": "Elevator in the chemical engineering wing."}
+  ]
+}
