@@ -64,7 +64,7 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
       builder: (context) => AlertDialog(
         title: Text('Place ${station.name} on floor ${position.floor}?'),
         content: const Text(
-          'Install this Pokémon’s printed marker flat at the selected spot. Print the image exactly 20 cm wide. Only confirm after checking the physical location.',
+          'This map point becomes a GPS target using this floor’s calibration. Pokémon appear automatically nearby in GPS AR. Check that the location is accessible.',
         ),
         actions: [
           TextButton(
@@ -98,7 +98,7 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Pokémon marker setup'),
+      title: const Text('Pokémon GPS setup'),
       actions: [
         IconButton(
           tooltip: 'Pokémon AR tutorial',
@@ -115,12 +115,12 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
             padding: const EdgeInsets.all(16),
             children: [
               const Text(
-                'Choose a Pokémon, select the floor, turn on Test position, then tap the exact marker location. Each marker identifies one encounter. Positions are saved on this device.',
+                'Choose a Pokémon, select the floor, turn on Test position, and tap its location. Your saved floor calibration converts the point to GPS. No printed markers are needed.',
               ),
               const SizedBox(height: 12),
               FilledButton.icon(
                 icon: const Icon(Icons.view_in_ar),
-                label: const Text('Scan placed markers'),
+                label: const Text('Find Pokémon in GPS AR'),
                 onPressed:
                     _stations.isEmpty ||
                         kIsWeb ||
@@ -129,13 +129,15 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
                     : () => Navigator.push(
                         context,
                         MaterialPageRoute<void>(
-                          builder: (_) =>
-                              StationArScreen(stations: List.of(_stations)),
+                          builder: (_) => StationArScreen(
+                            stations: List.of(_stations),
+                            initialFloor: _stations.first.position.floor,
+                          ),
                         ),
                       ),
               ),
               if (kIsWeb || defaultTargetPlatform != TargetPlatform.android)
-                const Text('AR scanning is currently enabled on Android only.'),
+                const Text('GPS AR is currently enabled on Android only.'),
               OutlinedButton(
                 onPressed: _stations.isEmpty
                     ? null
@@ -166,7 +168,7 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
                     return Card(
                       child: ListTile(
                         leading: Image.asset(
-                          'assets/markers/marker-${model['id']}.png',
+                          'assets/pokemon/thumbnails/${model['id']}.png',
                           width: 48,
                         ),
                         title: Text(model['name'] as String),

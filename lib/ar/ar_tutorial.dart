@@ -16,23 +16,23 @@ class ArTutorial extends StatelessWidget {
   static const steps = [
     (
       'Choose a Pokémon',
-      'Open Set up Pokémon AR and tap a Pokémon. Pick the floor, tap Test position, then tap where you will put its marker. Save the placement after checking the spot.',
+      'Open Set up Pokémon AR and tap a Pokémon. Pick the floor, tap Test position, then tap its location and save. You can also use Shuffle on the map to assign all Pokémon to landmarks.',
     ),
     (
-      'Print its marker',
-      'Use the matching image from the printable marker pack. Print the marker image exactly 20 cm wide, without stretching it. Each Pokémon has its own marker.',
+      'Calibrate your floor once',
+      'Open PFT Map, select your floor, then choose GPS options → Calibrate floor. Record three widely spaced known positions forming a triangle and save. Existing calibrations still work.',
     ),
     (
-      'Put the marker in place',
-      'Lay the printed marker flat at your saved location. Keep the full image uncovered and well lit. If you used Shuffle, move the markers to the new map locations.',
+      'Walk toward a saved point',
+      'Use the map to find the location. Pokémon load automatically when your reported GPS position is within 20 m of their saved point. Select your floor manually; GPS cannot identify it.',
     ),
     (
-      'Open the AR scanner',
-      'Go back to Set up Pokémon AR and tap Scan placed markers. Allow camera access. Use an Android phone that supports ARCore; install or update Google Play Services for AR if prompted.',
+      'Open GPS AR',
+      'Tap Find Pokémon in GPS AR in setup, or the AR icon on the map. Allow location and camera access. Use an ARCore-compatible Android phone with a compass. Install or update Google Play Services for AR if prompted.',
     ),
     (
       'Point, pause, and meet your Pokémon',
-      'Point the rear camera at the whole marker. Move slowly and hold steady while it scans. The Pokémon appears on the marker and animates. Tap the camera icon to save an AR photo to Gallery.',
+      'Slowly scan the ground, then hold the phone facing forward. Nearby Pokémon appear automatically at estimated GPS positions and stay anchored while you walk around. No printables or placement tap needed. Tap the camera icon to save an AR photo.',
     ),
   ];
   @override
@@ -59,7 +59,7 @@ class ArTutorial extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Text(
-            'A printed marker brings the Pokémon into AR. GPS and map pins help you find the spot; they do not make it appear. Open Camera takes regular photos and videos.',
+            'Your GPS and map pins now bring Pokémon into AR—no printables. GPS, compass, and calibration errors can shift their appearance, especially indoors. Open Camera still takes regular photos and videos.',
           ),
         ),
       ),
@@ -94,11 +94,11 @@ class ArTutorial extends StatelessWidget {
       ),
       const SizedBox(height: 8),
       const Text(
-        'Check that this Pokémon has a saved placement and that you printed its matching marker. Avoid glare, shadows, folds, and motion. Back up until the whole marker fits in view, then move closer slowly. If tracking pauses, point at the marker again.',
+        'Check the selected floor, saved placement, and calibration. Move within 20 m and wait for GPS accuracy of ±20 m or better. Scan a well-lit, textured floor. Move the phone in a figure eight if compass alignment is poor. Use Realign / retry after improving reception.',
       ),
       const SizedBox(height: 16),
       const Text(
-        'Want a quick preview? Gallery → Pokémon shows animated models without a printed marker or GPS.',
+        'Want a quick preview? Gallery → Pokémon shows animated models without GPS or an AR-compatible phone.',
       ),
       const SizedBox(height: 16),
       FilledButton(

@@ -89,6 +89,7 @@ internal class AndroidARView(
 
     private var session: Session? = null
     private var currentFrame: Frame? = null
+    private var gpsHeading: GpsHeading? = null
 
     private val backgroundRenderer = BackgroundRenderer()
     private val axisRenderer = AxisRenderer()
@@ -215,6 +216,46 @@ internal class AndroidARView(
                                 result.success(serializePose(cameraPose))
                             } else {
                                 result.error("Error", "could not get camera pose", null)
+                            }
+                        }
+                        "getGpsPlacementFrame" -> {
+                            if (!isSessionResumed) {
+                                result.success(mapOf("status" to "Waiting for AR camera tracking."))
+                                return
+                            }
+                            val latitude = call.argument<Number>("latitude")?.toDouble()
+                            val longitude = call.argument<Number>("longitude")?.toDouble()
+                            val altitude = call.argument<Number>("altitude")?.toDouble() ?: 0.0
+                            if (latitude == null || longitude == null || !latitude.isFinite() || !longitude.isFinite() || !altitude.isFinite()) {
+                                result.error("gps_arguments", "Invalid GPS coordinates", null)
+                                return
+                            }
+                            val heading = gpsHeading ?: GpsHeading(activity).also { gpsHeading = it }
+                            if (!heading.start()) {
+                                result.success(mapOf("status" to "This phone has no usable compass sensor."))
+                                return
+                            }
+                            glSurfaceView.queueEvent {
+                                val response = try {
+                                    val frame = currentFrame
+                                    val bearing = heading.bearing(latitude,longitude,altitude)
+                                    if (!isSessionResumed || frame == null || frame.camera.trackingState != TrackingState.TRACKING) {
+                                        mapOf("status" to "Move the camera slowly to establish AR tracking.")
+                                    } else if (bearing == null) {
+                                        mapOf("status" to "Hold the phone facing forward. Move it in a figure eight to improve compass accuracy.")
+                                    } else {
+                                        val camera = frame.camera.pose
+                                        val ground = session?.getAllTrackables(Plane::class.java)?.filter {
+                                            it.trackingState == TrackingState.TRACKING && it.subsumedBy == null &&
+                                                it.type == Plane.Type.HORIZONTAL_UPWARD_FACING &&
+                                                camera.ty()-it.centerPose.ty() in 0.3f..2.7f
+                                        }?.minByOrNull { it.centerPose.ty() }
+                                        if (ground == null) mapOf("status" to "Scan the ground slowly until a floor is detected.")
+                                        else mapOf("status" to "ready", "camera" to serializePose(camera),
+                                            "floorY" to ground.centerPose.ty().toDouble(), "heading" to bearing)
+                                    }
+                                } catch (_: Exception) { mapOf("status" to "AR alignment is not ready. Keep scanning the floor.") }
+                                activity.runOnUiThread { result.success(response) }
                             }
                         }
                         "snapshot" -> {
@@ -526,6 +567,7 @@ internal class AndroidARView(
     }
 
     fun onPause() {
+        gpsHeading?.stop()
         // hide instructions view if no longer required
         if (showAnimatedGuide){
             animatedGuide?.let { guide ->

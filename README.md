@@ -123,4 +123,4 @@ across floors, placement after zoom/pan, encounter callbacks, and small screens.
 
 ## Android Pokémon prototype
 
-See [Android setup and phone testing](ANDROID_TESTING.md) for marker printing, saved map placements, and AR testing. The home screen includes **Set up Pokémon AR**. iOS scanning is not enabled yet.
+See [Android setup and phone testing](ANDROID_TESTING.md) for GPS calibration, saved map placements, and markerless AR testing. **Set up Pokémon AR → Find Pokémon in GPS AR** uses the existing per-floor calibration and saved points. Nearby Pokémon appear automatically at approximate GPS positions once compass and floor tracking are ready. No printed markers or placement taps are required. iOS AR is not enabled yet.

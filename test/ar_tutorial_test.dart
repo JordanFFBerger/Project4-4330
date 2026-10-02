@@ -19,7 +19,7 @@ void main() {
       await tester.tap(find.text('Pokémon AR tutorial'));
       await tester.pumpAndSettle();
       expect(find.text('Make Pokémon appear'), findsOneWidget);
-      expect(find.textContaining('GPS and map pins'), findsOneWidget);
+      expect(find.textContaining('Your GPS and map pins'), findsOneWidget);
       for (final step in ArTutorial.steps) {
         await tester.scrollUntilVisible(
           find.text(step.$1),
@@ -40,6 +40,8 @@ void main() {
           matching: find.byType(Scrollable),
         ),
       );
+      await tester.ensureVisible(find.widgetWithText(FilledButton, 'Got it'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Got it'));
       await tester.pumpAndSettle();
       expect(find.byType(ArTutorial), findsNothing);

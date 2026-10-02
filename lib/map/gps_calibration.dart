@@ -72,6 +72,30 @@ class GpsCalibration {
   }
   final List<GpsAnchor> anchors;
   int get floor => anchors.first.position.floor;
+
+  /// Inverse of project: preserves the user's saved floor-plan placements.
+  (double latitude, double longitude) gpsFor(PftMapPosition position) {
+    if (position.floor != floor) throw ArgumentError('Wrong calibrated floor');
+    final a = anchors[0].position;
+    final b = anchors[1].position;
+    final c = anchors[2].position;
+    final determinant = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    final u =
+        ((position.x - a.x) * (c.y - a.y) - (position.y - a.y) * (c.x - a.x)) /
+        determinant;
+    final v =
+        ((b.x - a.x) * (position.y - a.y) - (b.y - a.y) * (position.x - a.x)) /
+        determinant;
+    return (
+      anchors[0].latitude +
+          u * (anchors[1].latitude - anchors[0].latitude) +
+          v * (anchors[2].latitude - anchors[0].latitude),
+      anchors[0].longitude +
+          u * (anchors[1].longitude - anchors[0].longitude) +
+          v * (anchors[2].longitude - anchors[0].longitude),
+    );
+  }
+
   (double, double) _meters(double lat, double lon) => (
     (lon - anchors.first.longitude) *
         111320 *

@@ -50,6 +50,13 @@ class ARSessionManager {
   }
 
   /// Returns the camera pose in Matrix4 format with respect to the world coordinate system of the [ARView]
+  Future<Map<String, dynamic>> getGpsPlacementFrame(double latitude, double longitude, double altitude) async {
+    final frame = await _channel.invokeMapMethod<String, dynamic>('getGpsPlacementFrame', {
+      'latitude': latitude, 'longitude': longitude, 'altitude': altitude,
+    });
+    return frame ?? {'status': 'AR alignment unavailable'};
+  }
+
   Future<Matrix4?> getCameraPose() async {
     try {
       final serializedCameraPose =

@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../ar/station_store.dart';
+import '../ar/station_ar_screen.dart';
 import '../gallery/gallery_screen.dart';
 import 'gps_calibration.dart';
 import 'gps_calibration_screen.dart';
@@ -150,7 +152,7 @@ class _ExplorerScreenState extends State<ExplorerScreen>
       builder: (context) => AlertDialog(
         title: const Text('Shuffle all Pokémon?'),
         content: const Text(
-          'Replace saved placements with random map landmarks for all 13 Pokémon. Move printed Pokémon markers to the new spots before using AR. Landmark access must be checked on site.',
+          'Replace saved placements with random map landmarks for all 13 Pokémon. Calibrate each floor to use these points in GPS AR. Landmark access must be checked on site.',
         ),
         actions: [
           TextButton(
@@ -248,6 +250,25 @@ class _ExplorerScreenState extends State<ExplorerScreen>
           .toList(),
       onEncounterSelected: _pokemon,
       extraActions: [
+        if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
+          IconButton(
+            tooltip: 'Find Pokémon in GPS AR',
+            icon: const Icon(Icons.view_in_ar),
+            onPressed: _stations.isEmpty
+                ? null
+                : () {
+                    _stop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (_) => StationArScreen(
+                          stations: List.of(_stations),
+                          initialFloor: _floor,
+                        ),
+                      ),
+                    );
+                  },
+          ),
         IconButton(
           tooltip: 'Shuffle Pokémon',
           onPressed: _busy ? null : _shuffle,
