@@ -6,6 +6,7 @@ import 'package:video_player/video_player.dart';
 
 import '../ar/station_store.dart';
 import '../camera_screen.dart';
+import '../pokedex/pokedex_panel.dart';
 import 'media_store.dart';
 import 'photo_editor.dart';
 
@@ -28,7 +29,7 @@ class GallerySection extends StatelessWidget {
                 height: 48,
               ),
               title: const Text('Pokémon'),
-              subtitle: const Text('Explore animated 3D models'),
+              subtitle: const Text('Animated models & Pokédex details'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.push(
                 context,
@@ -75,7 +76,11 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   late Future<List<MediaItem>> _media = _loadMedia();
   void _reload() {
-    if (mounted) setState(() => _media = _loadMedia());
+    if (mounted) {
+      setState(() {
+        _media = _loadMedia();
+      });
+    }
   }
 
   Future<void> _camera() async {
@@ -276,30 +281,46 @@ class PokemonPreviewScreen extends StatelessWidget {
   const PokemonPreviewScreen({super.key, required this.model});
   final Map<String, dynamic> model;
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(model['name'] as String)),
-    body: Column(
-      children: [
-        Expanded(
-          child: ModelViewer(
-            src: 'assets/pokemon/${model['file']}',
-            alt: 'Animated ${model['name']}',
-            autoPlay: true,
-            autoRotate: true,
-            cameraControls: true,
-            ar: false,
-            backgroundColor: const Color(0xFFF4F0FA),
-            debugLogging: false,
-          ),
+  Widget build(BuildContext context) => DefaultTabController(
+    length: 2,
+    child: Scaffold(
+      appBar: AppBar(
+        title: Text(model['name'] as String),
+        bottom: const TabBar(
+          tabs: [
+            Tab(text: '3D model'),
+            Tab(text: 'Pokédex'),
+          ],
         ),
-        const SafeArea(
-          top: false,
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Text('Drag to rotate • Pinch to zoom'),
+      ),
+      body: TabBarView(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: ModelViewer(
+                  src: 'assets/pokemon/${model['file']}',
+                  alt: 'Animated ${model['name']}',
+                  autoPlay: true,
+                  autoRotate: true,
+                  cameraControls: true,
+                  ar: false,
+                  backgroundColor: const Color(0xFFF4F0FA),
+                  debugLogging: false,
+                ),
+              ),
+              const SafeArea(
+                top: false,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text('Drag to rotate • Pinch to zoom'),
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+          PokedexPanel(id: model['id'] as int),
+        ],
+      ),
     ),
   );
 }

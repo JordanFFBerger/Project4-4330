@@ -3,7 +3,8 @@ import 'gallery/gallery_screen.dart';
 
 import 'package:flutter/material.dart';
 
-import 'map/pft_map_screen.dart';
+import 'login_page.dart';
+import 'map/explorer_screen.dart';
 import 'ar/station_setup_screen.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF461D7C)),
       ),
-      home: const HomeScreen(),
+      home: LoginPage(onLoginSuccess: (_) => const HomeScreen()),
     );
   }
 }
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (context) => PftMapScreen(
+                    builder: (context) => ExplorerScreen(
                       onOpenCamera: () {
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(

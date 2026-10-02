@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,6 +37,25 @@ class PokemonStation {
 }
 
 class StationStore {
+  static List<PokemonStation> randomize(
+    List<Map<String, dynamic>> catalog,
+    List<PftLandmark> landmarks,
+    Random random,
+  ) {
+    final spots = List<PftLandmark>.of(landmarks)..shuffle(random);
+    if (spots.length < catalog.length) {
+      throw StateError('Not enough distinct landmarks');
+    }
+    return [
+      for (var i = 0; i < catalog.length; i++)
+        PokemonStation(
+          id: catalog[i]['id'] as int,
+          name: catalog[i]['name'] as String,
+          position: spots[i].position,
+        ),
+    ];
+  }
+
   static const key = 'pft.markerStations.v1';
   static Future<List<PokemonStation>> load() async {
     final prefs = await SharedPreferences.getInstance();

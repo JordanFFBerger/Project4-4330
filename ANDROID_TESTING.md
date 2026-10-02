@@ -40,3 +40,19 @@ Models were decoded from Draco, converted from WebP to PNG textures, centered at
 - The AR screen has a camera button to save a composite AR photo once a Pokémon is placed. AR video recording is not part of this update; video recording is in the regular Camera screen.
 - Captures are stored privately inside the app, not uploaded or automatically added to the system Photos app. Updating the APK with the same signature preserves them; uninstalling or clearing app data removes them.
 - Install the new APK over the old version. Verify portrait/landscape preview, both lenses, video audio, background/resume, playback, all editor tools, and AR photo composition on the phone. Camera hardware and WebView rendering still require device testing.
+# Login and Pokédex integration (1.0.2)
+
+## Live GPS and Shuffle
+
+- **Open PFT Map → Shuffle Pokémon** assigns all 13 Pokémon to distinct randomly selected landmarks and replaces the device's previous placements after confirmation. Floor coordinates and Pokémon identities persist. These are approximate landmark positions, not a guarantee of public access. Move the Pokémon-specific printed markers to match before scanning AR encounters.
+- Tap a Pokémon pin to open its animated model and Pokédex entry.
+- Select your floor, open **GPS options → Calibrate floor**, and record three points. At each point, stand at a known position, choose **Add point**, tap **Test position** on the floor map, and mark your position. Remain still while the phone records GPS. Choose widely spaced points forming a triangle (at least 20 m apart); low-quality, closely spaced or collinear fixes are rejected. Save calibration, then return to **GPS options → Start GPS**. Repeat calibration on each floor you use.
+- Calibration and locations stay on this device. No live GPS coordinates are sent to PokéAPI or the login server. Location permission is requested when GPS is used. GPS stops when the app goes into the background; restart it from the menu on return.
+- GPS is approximate, particularly indoors. Select your floor manually. The displayed ± value is the phone's reported horizontal accuracy; calibration may add error. Fixes older than 30 seconds, with reported accuracy worse than 50 m, or outside the calibrated image do not display a live dot. No route guidance or room-level positioning is claimed.
+- Phone checks: deny/allow permission, disable location services, record and reload a calibration, walk between known points, switch floors, background the app, and verify Shuffle persists after restart. Automated checks cover coordinate projection, invalid calibration, distinct landmark assignment, persistence and phone layouts. Actual GPS accuracy still requires on-site validation.
+
+- Startup preserves the login/registration screen from the login branch. **Continue as guest** opens the full local app without an account or login-server connection. Saved captures and placements remain device-local and are shared by guests and signed-in users on that device.
+- Existing account login still uses the development server configuration (Android emulator: `http://10.0.2.2:3000`). For a physical phone, use Guest until a reachable authentication service is configured. This update does not deploy an authentication server.
+- In Gallery → Pokémon, select a Pokémon and open **Pokédex**. All 13 models have REST lookups against `https://pokeapi.co/api/v2/pokemon/{id}/` and `pokemon-species/{id}/` for English descriptions, category, types, metric height/weight, abilities and base stats.
+- PokéAPI responses are cached on the device. Open a Pokémon's details online once, then reopen offline to verify the cached entry. An uncached offline entry offers Retry; 3D models remain bundled offline.
+- Verify startup guest access, registration validation, the 3D/Pokédex tabs, and an uncached network failure/retry. Automated tests cover guest navigation, validation, response conversion, cache reuse and retry behavior.

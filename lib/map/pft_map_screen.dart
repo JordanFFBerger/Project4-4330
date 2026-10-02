@@ -17,6 +17,11 @@ class PftMapScreen extends StatefulWidget {
     this.onManualPositionChanged,
     this.onOpenCamera,
     this.allowManualPositioning = true,
+    this.initialFloor = 1,
+    this.onFloorChanged,
+    this.positionLabel = 'Player position',
+    this.extraActions = const [],
+    this.statusText,
   });
 
   final List<PftEncounter> encounters;
@@ -25,6 +30,11 @@ class PftMapScreen extends StatefulWidget {
   final ValueChanged<PftMapPosition>? onManualPositionChanged;
   final VoidCallback? onOpenCamera;
   final bool allowManualPositioning;
+  final int initialFloor;
+  final ValueChanged<int>? onFloorChanged;
+  final String positionLabel;
+  final List<Widget> extraActions;
+  final String? statusText;
 
   @override
   State<PftMapScreen> createState() => _PftMapScreenState();
@@ -33,13 +43,20 @@ class PftMapScreen extends StatefulWidget {
 class _PftMapScreenState extends State<PftMapScreen> {
   late Future<PftMapData> _data = PftMapData.load();
   final _canvasKey = GlobalKey<_PftMapCanvasState>();
-  int _floorId = 1;
+  late int _floorId = widget.initialFloor;
   PftLandmark? _selected;
   PftMapPosition? _manualPosition;
   PftEncounter? _selectedEncounter;
   bool _placingPosition = false;
 
+  @override
+  void didUpdateWidget(covariant PftMapScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!widget.allowManualPositioning) _placingPosition = false;
+  }
+
   void _selectLandmark(PftLandmark landmark) {
+    widget.onFloorChanged?.call(landmark.position.floor);
     setState(() {
       _floorId = landmark.position.floor;
       _selected = landmark;
@@ -131,12 +148,13 @@ class _PftMapScreenState extends State<PftMapScreen> {
             'Building Guide (2021). Landmark pins are approximate.\n\n'
             'Room names and access may have changed. Lab and office markers '
             'identify places, and do not indicate public access.\n\n'
-            'Test position is placed manually. Automatic indoor location '
-            'tracking is not connected.\n\n'
+            'GPS is approximate and requires three-point calibration for each floor. '
+            'Select your floor manually; indoor GPS can drift.\n\n'
             'lsu.edu/eng/images/pft_floorplan_guide2_webupdated2021.pdf',
           ),
         ),
         actions: [
+          ...widget.extraActions,
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('Close'),
@@ -179,8 +197,9 @@ class _PftMapScreenState extends State<PftMapScreen> {
                   children: [
                     const Text('Could not load the PFT map.'),
                     TextButton(
-                      onPressed: () =>
-                          setState(() => _data = PftMapData.load()),
+                      onPressed: () => setState(() {
+                        _data = PftMapData.load();
+                      }),
                       child: const Text('Retry'),
                     ),
                   ],
@@ -192,7 +211,9 @@ class _PftMapScreenState extends State<PftMapScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             final floor = data.floors.firstWhere((item) => item.id == _floorId);
-            final position = widget.playerPosition ?? _manualPosition;
+            final position =
+                widget.playerPosition ??
+                (widget.allowManualPositioning ? _manualPosition : null);
             return Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
               child: Column(
@@ -227,6 +248,7 @@ class _PftMapScreenState extends State<PftMapScreen> {
                     selected: {_floorId},
                     onSelectionChanged: (selection) => setState(() {
                       _floorId = selection.single;
+                      widget.onFloorChanged?.call(_floorId);
                       _selected = null;
                       _selectedEncounter = null;
                       _placingPosition = false;
@@ -235,7 +257,7 @@ class _PftMapScreenState extends State<PftMapScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Text(
-                      floor.description,
+                      widget.statusText ?? floor.description,
                       style: const TextStyle(
                         color: Color(0xFF6D647B),
                         fontSize: 12,
@@ -334,7 +356,9 @@ class _PftMapScreenState extends State<PftMapScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 6),
                       child: Text(
-                        widget.playerPosition != null ? 'Player position' : 'Manual test position · automatic tracking not connected',
+                        widget.playerPosition != null
+                            ? widget.positionLabel
+                            : 'Manual test position',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 11,

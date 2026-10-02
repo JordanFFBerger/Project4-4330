@@ -199,4 +199,35 @@ void main() {
       expect(tester.takeException(), isNull);
     }
   });
+
+  testWidgets(
+    'GPS status and controls fit phone layouts and hide on other floors',
+    (tester) async {
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.devicePixelRatio = 1;
+      for (final size in [const Size(360, 740), const Size(740, 360)]) {
+        tester.view.physicalSize = size;
+        await openMap(
+          tester,
+          screen: PftMapScreen(
+            allowManualPositioning: false,
+            playerPosition: PftMapPosition(floor: 1, x: .5, y: .5),
+            statusText: 'Approximate GPS ±15 m • floor 1 selected manually',
+            positionLabel: 'Approximate GPS ±15 m',
+            extraActions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.shuffle)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.my_location)),
+            ],
+          ),
+        );
+        expect(tester.takeException(), isNull);
+        expect(find.byKey(const ValueKey('player-position')), findsOneWidget);
+        await tester.tap(find.text('2nd floor'));
+        await tester.pumpAndSettle();
+        expect(find.byKey(const ValueKey('player-position')), findsNothing);
+        await tester.pumpWidget(const SizedBox());
+      }
+    },
+  );
 }
