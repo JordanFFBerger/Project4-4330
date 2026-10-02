@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
+import 'login_page.dart';
 import 'map/pft_map_screen.dart';
 
 void main() {
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF461D7C)),
       ),
-      home: const HomeScreen(),
+       home: LoginPage(
+       onLoginSuccess: (_) => const HomeScreen(),
+       ),
     );
   }
 }
