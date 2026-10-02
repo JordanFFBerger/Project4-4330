@@ -7,39 +7,83 @@ import 'map/explorer_screen.dart';
 import 'ar/station_setup_screen.dart';
 import 'ar/ar_tutorial.dart';
 import 'photobook_theme.dart';
-
+import 'music_controller.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final MusicController musicController = MusicController();
+
+  @override
+  void initState() {
+    super.initState();
+    musicController.start();
+  }
+
+  @override
+  void dispose() {
+    musicController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'PFT Fieldnotes',
-    theme: photobookTheme(),
-    home: LoginPage(onLoginSuccess: (_) => const HomeScreen()),
-  );
+        debugShowCheckedModeBanner: false,
+        title: 'PFT Fieldnotes',
+        theme: photobookTheme(),
+        home: LoginPage(
+          onLoginSuccess: (_) => HomeScreen(
+            musicController: musicController,
+          ),
+        ),
+      );
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    required this.musicController,
+  });
+  final MusicController musicController;
   void _open(BuildContext context, Widget screen) =>
       Navigator.of(context)
           .push(MaterialPageRoute<void>(builder: (_) => screen));
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('PFT Fieldnotes'),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.only(right: 20),
-          child: Icon(Icons.auto_stories_outlined),
-        ),
-      ],
+  title: const Text('PFT Fieldnotes'),
+  actions: [
+    AnimatedBuilder(
+      animation: musicController,
+      builder: (context, _) {
+        return IconButton(
+          tooltip: musicController.muted
+              ? 'Unmute music'
+              : 'Mute music',
+          onPressed: musicController.toggleMute,
+          icon: Icon(
+            musicController.muted
+                ? Icons.volume_off
+                : Icons.volume_up,
+          ),
+        );
+      },
     ),
+    const Padding(
+      padding: EdgeInsets.only(right: 20),
+      child: Icon(Icons.auto_stories_outlined),
+    ),
+  ],
+),
     body: Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 760),
