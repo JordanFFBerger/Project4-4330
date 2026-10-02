@@ -74,8 +74,8 @@
       "name": "Charizard",
       "file": "6.glb",
       "url": "assets/pokemon/6.glb",
-      "bytes": 631956,
-      "sha256": "68396887ca3dcf5e2579c362c8ed3c50e29eae1ac96fd311ea46c0622e800cd4",
+      "bytes": 632216,
+      "sha256": "084cf49ce9e5644af94152306ccbd700c2480f0dfb859ae958c5dd357ca0e151",
       "source": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/429de1288cea0d43f5b4f56305d2276e94239d65/models/opt/regular/6.glb",
       "requiredExtensions": [],
       "animations": [
@@ -87,7 +87,8 @@
         }
       ],
       "originalSha256": "1dc18de231df4ba6fcc2c2ee9f9d483c2f33478bca52cf83357a5c9188c3076e",
-      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m"
+      "conversion": "Draco decoded, WebP to PNG, pivot below, maximum rest-pose dimension 0.6m",
+      "materialRepair": "Yellow unlit/emissive core and translucent orange envelope replace grayscale game-effect materials; original animation and geometry preserved."
     },
     {
       "id": 25,

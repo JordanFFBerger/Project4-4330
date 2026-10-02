@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'map/explorer_screen.dart';
 import 'ar/station_setup_screen.dart';
+import 'ar/ar_tutorial.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,11 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
+            OutlinedButton.icon(
+              icon: const Icon(Icons.help_outline),
+              label: const Text('Pokémon AR tutorial'),
+              onPressed: () => showArTutorial(context),
+            ),
             ElevatedButton.icon(
               icon: const Icon(Icons.view_in_ar),
               label: const Text('Set up Pokémon AR'),

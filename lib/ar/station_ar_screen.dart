@@ -11,6 +11,7 @@ import 'package:vector_math/vector_math_64.dart' as vm;
 
 import 'station_store.dart';
 import '../gallery/media_store.dart';
+import 'ar_tutorial.dart';
 
 class StationArScreen extends StatefulWidget {
   const StationArScreen({super.key, required this.stations});
@@ -149,6 +150,11 @@ class _StationArScreenState extends State<StationArScreen> {
     appBar: AppBar(
       title: const Text('Pokémon AR'),
       actions: [
+        IconButton(
+          tooltip: 'Pokémon AR tutorial',
+          onPressed: () => showArTutorial(context),
+          icon: const Icon(Icons.help_outline),
+        ),
         IconButton(
           tooltip: 'Save AR photo',
           onPressed: _savingPhoto || _node == null ? null : _takePhoto,

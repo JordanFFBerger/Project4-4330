@@ -5,6 +5,7 @@ import '../map/pft_map_data.dart';
 import '../map/pft_map_screen.dart';
 import 'station_store.dart';
 import 'station_ar_screen.dart';
+import 'ar_tutorial.dart';
 
 class StationSetupScreen extends StatefulWidget {
   const StationSetupScreen({super.key});
@@ -96,7 +97,16 @@ class _StationSetupScreenState extends State<StationSetupScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Pokémon marker setup')),
+    appBar: AppBar(
+      title: const Text('Pokémon marker setup'),
+      actions: [
+        IconButton(
+          tooltip: 'Pokémon AR tutorial',
+          onPressed: () => showArTutorial(context),
+          icon: const Icon(Icons.help_outline),
+        ),
+      ],
+    ),
     body: _loading
         ? const Center(child: CircularProgressIndicator())
         : _error != null

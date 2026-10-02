@@ -42,6 +42,11 @@ Models were decoded from Draco, converted from WebP to PNG textures, centered at
 - Install the new APK over the old version. Verify portrait/landscape preview, both lenses, video audio, background/resume, playback, all editor tools, and AR photo composition on the phone. Camera hardware and WebView rendering still require device testing.
 # Login and Pokédex integration (1.0.2)
 
+## Tutorial and Charizard update (1.0.3)
+
+- **Pokémon AR tutorial** is available on Home and through the help icon in marker setup and the AR scanner. It explains placement, 20 cm printed markers, scanning, and troubleshooting in five steps. GPS alone does not trigger encounters.
+- Charizard now uses a bright yellow/orange tail-flame material instead of the converted grayscale effect textures. Animation, skinning and geometry are preserved. The repair was visually checked in the model viewer; verify the tail on your phone in both Gallery and the AR scanner.
+
 ## Live GPS and Shuffle
 
 - **Open PFT Map → Shuffle Pokémon** assigns all 13 Pokémon to distinct randomly selected landmarks and replaces the device's previous placements after confirmation. Floor coordinates and Pokémon identities persist. These are approximate landmark positions, not a guarantee of public access. Move the Pokémon-specific printed markers to match before scanning AR encounters.
