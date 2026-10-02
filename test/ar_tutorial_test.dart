@@ -16,6 +16,7 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+      await tester.scrollUntilVisible(find.text('Pokémon AR tutorial'), 300);
       await tester.tap(find.text('Pokémon AR tutorial'));
       await tester.pumpAndSettle();
       expect(find.text('Make Pokémon appear'), findsOneWidget);

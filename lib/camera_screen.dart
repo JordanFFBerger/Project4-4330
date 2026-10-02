@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'gallery/media_store.dart';
+import 'gallery/gallery_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -21,6 +22,8 @@ class _CameraScreenState extends State<CameraScreen>
   String? _error;
   String? _pendingPath;
   bool _pendingVideo = false;
+  MediaItem? _lastCapture;
+  bool _viewingCapture = false;
   int _generation = 0, _seconds = 0;
   Timer? _timer;
   @override
@@ -81,7 +84,10 @@ class _CameraScreenState extends State<CameraScreen>
 
   Future<void> _savePending() async {
     if (_pendingPath == null) return;
-    await _store.importCapture(_pendingPath!, video: _pendingVideo);
+    _lastCapture = await _store.importCapture(
+      _pendingPath!,
+      video: _pendingVideo,
+    );
     _pendingPath = null;
     _notice('Saved to Gallery');
   }
@@ -164,7 +170,7 @@ class _CameraScreenState extends State<CameraScreen>
       _releaseTask ??= _release();
     }
     if (state == AppLifecycleState.resumed) {
-      _active = true;
+      _active = !_viewingCapture;
       () async {
         await _releaseTask;
         _releaseTask = null;
@@ -204,6 +210,29 @@ class _CameraScreenState extends State<CameraScreen>
       appBar: AppBar(
         title: const Text('Camera'),
         actions: [
+          IconButton(
+            tooltip: 'View and share last capture',
+            onPressed: _lastCapture == null || _busy || _recording
+                ? null
+                : () async {
+                    _viewingCapture = true;
+                    _active = false;
+                    await _release();
+                    if (!context.mounted) return;
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (_) => MediaDetailScreen(item: _lastCapture!),
+                      ),
+                    );
+                    _viewingCapture = false;
+                    if (mounted) {
+                      _active = true;
+                      await _open();
+                    }
+                  },
+            icon: const Icon(Icons.photo_library_outlined),
+          ),
           IconButton(
             tooltip: 'Switch front/back camera',
             onPressed:

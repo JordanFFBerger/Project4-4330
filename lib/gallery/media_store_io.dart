@@ -81,6 +81,14 @@ class MediaStore {
 
   Future<Uint8List> read(MediaItem item) async =>
       (await _file(item.id)).readAsBytes();
+  Future<String> sharePath(MediaItem item) async {
+    final file = await _file(item.id);
+    if (!await file.exists() || await file.length() == 0) {
+      throw StateError('This capture is no longer available.');
+    }
+    return file.path;
+  }
+
   Future<void> delete(MediaItem item) async => (await _file(item.id)).delete();
   Future<VideoPlayerController> videoController(MediaItem item) async =>
       VideoPlayerController.file(await _file(item.id));

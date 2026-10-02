@@ -5,6 +5,8 @@ import 'package:video_player/video_player.dart';
 import 'media_item.dart';
 
 class MediaStore {
+  Future<String> sharePath(MediaItem item) async =>
+      throw UnsupportedError('Sharing requires Android.');
   MediaStore({Future<String> Function()? directoryPath});
   bool get supported => false;
   Future<List<MediaItem>> list() async => [];

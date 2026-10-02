@@ -72,6 +72,47 @@ internal class ModelRenderer {
         }
     }
 
+    /** Center-camera ray against loaded model bounds; nearest intersected model wins.
+     * Uses the same camera and model transforms as rendering, on the Filament thread. */
+    fun focusedModel(callback: (String?) -> Unit) {
+        mainHandler.post {
+            if (!hasCamera || modelAssets.isEmpty()) { callback(null); return@post }
+            val cameraWorld = FloatArray(16)
+            synchronized(cameraLock) { Matrix.invertM(cameraWorld, 0, cameraViewMatrix, 0) }
+            var nearest: String? = null
+            var nearestDistance = Float.POSITIVE_INFINITY
+            for ((name, asset) in modelAssets) {
+                if (!name.startsWith("pokemon-")) continue
+                val transform = pendingTransforms[name] ?: continue
+                val inverse = FloatArray(16)
+                if (!Matrix.invertM(inverse, 0, transform, 0)) continue
+                val origin = FloatArray(4)
+                val direction = FloatArray(4)
+                Matrix.multiplyMV(origin, 0, inverse, 0, floatArrayOf(cameraWorld[12], cameraWorld[13], cameraWorld[14], 1f), 0)
+                Matrix.multiplyMV(direction, 0, inverse, 0, floatArrayOf(-cameraWorld[8], -cameraWorld[9], -cameraWorld[10], 0f), 0)
+                val box = asset.boundingBox
+                val center = box.center
+                val half = box.halfExtent
+                var near = 0.1f
+                var far = 100f
+                for (axis in 0..2) {
+                    val low = center[axis]-half[axis]
+                    val high = center[axis]+half[axis]
+                    if (kotlin.math.abs(direction[axis]) < 0.000001f) {
+                        if (origin[axis] < low || origin[axis] > high) { far = -1f; break }
+                    } else {
+                        val a = (low-origin[axis])/direction[axis]
+                        val b = (high-origin[axis])/direction[axis]
+                        near = maxOf(near, minOf(a,b))
+                        far = minOf(far, maxOf(a,b))
+                    }
+                }
+                if (far >= near && near < nearestDistance) { nearestDistance = near; nearest = name }
+            }
+            callback(nearest)
+        }
+    }
+
     fun updateLightEstimate(lightEstimate: com.google.ar.core.LightEstimate) {
         mainHandler.post {
             val engine = engine ?: return@post

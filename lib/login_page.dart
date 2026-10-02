@@ -151,9 +151,9 @@ class _LoginPageState extends State<LoginPage> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF0D47A1),
-                  Color(0xFF1976D2),
-                  Color(0xFFFFC107),
+                  Color(0xFFE6EAD9),
+                  Color(0xFFF7F2E8),
+                  Color(0xFFE5D1B4),
                 ],
               ),
             ),
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Icon(
               Icons.catching_pokemon,
               size: 220,
-              color: Color(0x26FFFFFF),
+              color: Color(0x19496451),
             ),
           ),
 
@@ -175,14 +175,18 @@ class _LoginPageState extends State<LoginPage> {
             child: Icon(
               Icons.catching_pokemon,
               size: 260,
-              color: Color(0x22FFFFFF),
+              color: Color(0x19496451),
             ),
           ),
 
           const Positioned(
             top: 120,
             right: 30,
-            child: Icon(Icons.bolt, size: 90, color: Color(0x55FFEB3B)),
+            child: Icon(
+              Icons.auto_stories_outlined,
+              size: 90,
+              color: Color(0x55496451),
+            ),
           ),
 
           SafeArea(
@@ -197,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.25),
+                        color: Colors.black.withValues(alpha: 0.08),
                         blurRadius: 30,
                         offset: const Offset(0, 14),
                       ),
@@ -216,6 +220,7 @@ class _LoginPageState extends State<LoginPage> {
                             : "Create Trainer Account",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                          fontFamily: 'serif',
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                         ),
@@ -225,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
 
                       Text(
                         isLogin
-                            ? "Log in to continue your Pokémon adventure."
+                            ? "Your next encounter belongs in a photobook."
                             : "Create an account and begin your journey.",
                         textAlign: TextAlign.center,
                         style: const TextStyle(color: Colors.grey),
@@ -239,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: "Username",
                           prefixIcon: const Icon(Icons.person_outline),
                           filled: true,
-                          fillColor: const Color(0xFFF4F6FA),
+                          fillColor: const Color(0xFFF2EEE4),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
                             borderSide: BorderSide.none,
@@ -268,7 +273,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF4F6FA),
+                          fillColor: const Color(0xFFF2EEE4),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
                             borderSide: BorderSide.none,
@@ -288,7 +293,7 @@ class _LoginPageState extends State<LoginPage> {
                               Icons.verified_user_outlined,
                             ),
                             filled: true,
-                            fillColor: const Color(0xFFF4F6FA),
+                            fillColor: const Color(0xFFF2EEE4),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide.none,

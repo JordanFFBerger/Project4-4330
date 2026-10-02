@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:video_player/video_player.dart';
@@ -9,6 +7,10 @@ import '../camera_screen.dart';
 import '../pokedex/pokedex_panel.dart';
 import 'media_store.dart';
 import 'photo_editor.dart';
+import 'media_share.dart';
+import '../photobook_theme.dart';
+
+import 'package:flutter/services.dart';
 
 class GallerySection extends StatelessWidget {
   const GallerySection({super.key});
@@ -40,7 +42,7 @@ class GallerySection extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.photo_library_outlined, size: 40),
               title: const Text('Photos & videos'),
-              subtitle: const Text('Your camera and AR captures'),
+              subtitle: const Text('Your photobook • keep, edit & share'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.push(
                 context,
@@ -97,7 +99,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
     initialIndex: widget.initialTab,
     child: Scaffold(
       appBar: AppBar(
-        title: const Text('Gallery'),
+        title: const Text('Your photobook'),
         actions: [
           IconButton(
             tooltip: 'Take photo or video',
@@ -145,25 +147,14 @@ class _GalleryScreenState extends State<GalleryScreen> {
                           builder: (_) => PokemonPreviewScreen(model: model),
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Image.asset(
-                                'assets/pokemon/thumbnails/${model['id']}.png',
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Text(
-                              model['name'] as String,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ],
+                      child: PhotoMount(
+                        caption: model['name'] as String,
+                        note:
+                            'POKÉMON / No. ${model['id'].toString().padLeft(3, '0')}',
+                        child: Image.asset(
+                          'assets/pokemon/thumbnails/${model['id']}.png',
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   );
@@ -229,6 +220,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
                               maxCrossAxisExtent: 200,
+                              mainAxisExtent: 220,
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 8,
                             ),
@@ -248,22 +240,29 @@ class _GalleryScreenState extends State<GalleryScreen> {
                                 );
                                 _reload();
                               },
-                              child: item.isVideo
-                                  ? const Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.play_circle_outline,
-                                          size: 56,
-                                        ),
-                                        Text('Video'),
-                                      ],
-                                    )
-                                  : SavedPhotoImage(
-                                      key: ValueKey(item.id),
-                                      item: item,
-                                    ),
+                              child: PhotoMount(
+                                caption: item.isVideo
+                                    ? 'Moving memories'
+                                    : 'A little encounter',
+                                note:
+                                    '${item.createdAt.month.toString().padLeft(2, '0')} / ${item.createdAt.day.toString().padLeft(2, '0')} / ${item.createdAt.year}',
+                                child: item.isVideo
+                                    ? const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.play_circle_outline,
+                                            size: 56,
+                                          ),
+                                          Text('Video'),
+                                        ],
+                                      )
+                                    : SavedPhotoImage(
+                                        key: ValueKey(item.id),
+                                        item: item,
+                                      ),
+                              ),
                             ),
                           );
                         },
@@ -305,7 +304,7 @@ class PokemonPreviewScreen extends StatelessWidget {
                   autoRotate: true,
                   cameraControls: true,
                   ar: false,
-                  backgroundColor: const Color(0xFFF4F0FA),
+                  backgroundColor: paper,
                   debugLogging: false,
                 ),
               ),
@@ -369,6 +368,30 @@ class _MediaDetailScreenState extends State<MediaDetailScreen>
     with WidgetsBindingObserver {
   VideoPlayerController? _player;
   String? _error;
+  bool _sharing = false;
+  Future<void> _share(ShareDestination destination) async {
+    if (_sharing) return;
+    setState(() => _sharing = true);
+    try {
+      await _player?.pause();
+      await MediaShare.send(widget.item, destination);
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              error is PlatformException
+                  ? (error.message ?? 'Could not open sharing.')
+                  : 'Could not share this capture. Try again.',
+            ),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _sharing = false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -466,6 +489,55 @@ class _MediaDetailScreenState extends State<MediaDetailScreen>
         ),
       ],
     ),
+    bottomNavigationBar: MediaShare.supported
+        ? SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Share a page of your adventure',
+                    style: TextStyle(fontFamily: 'serif', fontSize: 19),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 4,
+                    children: [
+                      FilledButton.tonalIcon(
+                        onPressed: _sharing
+                            ? null
+                            : () => _share(ShareDestination.instagram),
+                        icon: const Icon(Icons.camera_alt_outlined),
+                        label: const Text('Instagram'),
+                      ),
+                      FilledButton.tonalIcon(
+                        onPressed: _sharing
+                            ? null
+                            : () => _share(ShareDestination.twitter),
+                        icon: const Icon(Icons.alternate_email),
+                        label: const Text('Twitter / X'),
+                      ),
+                      TextButton.icon(
+                        onPressed: _sharing
+                            ? null
+                            : () => _share(ShareDestination.other),
+                        icon: const Icon(Icons.ios_share),
+                        label: Text(_sharing ? 'Preparing…' : 'More apps'),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    'Finish your post in the app you choose.',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : null,
     body: widget.item.isVideo
         ? (_error != null
               ? Center(child: Text(_error!))

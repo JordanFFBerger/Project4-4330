@@ -50,6 +50,8 @@ class ARSessionManager {
   }
 
   /// Returns the camera pose in Matrix4 format with respect to the world coordinate system of the [ARView]
+  Future<String?> getFocusedPokemon() => _channel.invokeMethod<String>('getFocusedPokemon');
+
   Future<Map<String, dynamic>> getGpsPlacementFrame(double latitude, double longitude, double altitude) async {
     final frame = await _channel.invokeMapMethod<String, dynamic>('getGpsPlacementFrame', {
       'latitude': latitude, 'longitude': longitude, 'altitude': altitude,

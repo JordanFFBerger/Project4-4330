@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-void showArTutorial(BuildContext context) {
-  showModalBottomSheet<void>(
+Future<void> showArTutorial(BuildContext context) async {
+  await showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
     useSafeArea: true,

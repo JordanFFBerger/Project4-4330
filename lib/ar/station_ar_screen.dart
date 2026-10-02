@@ -20,6 +20,9 @@ import '../map/location_access.dart';
 import 'ar_tutorial.dart';
 import 'gps_placement.dart';
 import 'station_store.dart';
+import 'focus_cry.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StationArScreen extends StatefulWidget {
   const StationArScreen({
@@ -49,6 +52,13 @@ class _StationArScreenState extends State<StationArScreen>
   Position? _fix;
   StreamSubscription<Position>? _gps;
   Timer? _timer;
+  Timer? _focusTimer;
+  final _cryGate = FocusCryGate();
+  final _audio = PokemonAudio();
+  final _clock = Stopwatch()..start();
+  bool _focusBusy = false, _muted = false, _tutorialOpen = false;
+  int? _focusedId;
+  String? _audioError;
   late int _floor = widget.initialFloor;
   int _epoch = 0;
   bool _busy = false,
@@ -65,6 +75,76 @@ class _StationArScreenState extends State<StationArScreen>
     WidgetsBinding.instance.addObserver(this);
     _loadCalibration();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _update());
+    _focusTimer = Timer.periodic(
+      const Duration(milliseconds: 250),
+      (_) => _checkFocus(),
+    );
+    _loadMute();
+  }
+
+  Future<void> _loadMute() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (mounted) {
+      setState(() => _muted = prefs.getBool('pft.criesMuted') ?? false);
+    }
+  }
+
+  Future<void> _toggleMute() async {
+    setState(() {
+      _muted = !_muted;
+      _audioError = null;
+    });
+    _cryGate.reset();
+    await _audio.stop();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('pft.criesMuted', _muted);
+  }
+
+  Future<void> _checkFocus() async {
+    if (_focusBusy ||
+        !_active ||
+        !_ready ||
+        _tutorialOpen ||
+        _placed.isEmpty ||
+        !mounted) {
+      return;
+    }
+    _focusBusy = true;
+    final epoch = _epoch;
+    try {
+      final name = await _session!.getFocusedPokemon().timeout(
+        const Duration(seconds: 1),
+      );
+      if (!mounted || !_active || _tutorialOpen || epoch != _epoch) return;
+      final id = name == null
+          ? null
+          : int.tryParse(name.split('-').elementAtOrNull(1) ?? '');
+      final focused = _placed.containsKey(id) ? id : null;
+      if (_focusedId != focused) setState(() => _focusedId = focused);
+      final speak = _cryGate.update(focused, _clock.elapsed);
+      if (!_muted && speak != null) {
+        await _audio.play(speak);
+        if (mounted && _audioError != null) setState(() => _audioError = null);
+      }
+    } catch (_) {
+      _cryGate.reset();
+      if (mounted) {
+        setState(() {
+          _focusedId = null;
+          _audioError = 'Cry unavailable. Try unmuting again.';
+        });
+      }
+    } finally {
+      _focusBusy = false;
+    }
+  }
+
+  Future<void> _tutorial() async {
+    _tutorialOpen = true;
+    _cryGate.reset();
+    await _audio.stop();
+    if (mounted) await showArTutorial(context);
+    _tutorialOpen = false;
   }
 
   void _message(String text) {
@@ -141,6 +221,11 @@ class _StationArScreenState extends State<StationArScreen>
   }
 
   void _remove(int id) {
+    if (_focusedId == id) {
+      _focusedId = null;
+      _cryGate.reset();
+      _audio.stop();
+    }
     final placed = _placed.remove(id);
     if (placed != null) {
       _objects?.removeNode(placed.node);
@@ -150,6 +235,9 @@ class _StationArScreenState extends State<StationArScreen>
 
   void _reset() {
     _epoch++;
+    _cryGate.reset();
+    _focusedId = null;
+    _audio.stop();
     for (final id in _placed.keys.toList()) {
       _remove(id);
     }
@@ -334,6 +422,8 @@ class _StationArScreenState extends State<StationArScreen>
     if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.hidden) {
       _active = false;
+      _cryGate.reset();
+      _audio.stop();
       _epoch++;
       _fix = null;
       _gps?.cancel();
@@ -350,6 +440,8 @@ class _StationArScreenState extends State<StationArScreen>
     _active = false;
     _epoch++;
     _timer?.cancel();
+    _focusTimer?.cancel();
+    _audio.stop();
     _gps?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     _session?.dispose();
@@ -362,8 +454,15 @@ class _StationArScreenState extends State<StationArScreen>
       title: const Text('GPS Pokémon AR'),
       actions: [
         IconButton(
+          tooltip: _muted ? 'Unmute Pokémon cries' : 'Mute Pokémon cries',
+          onPressed: _toggleMute,
+          icon: Icon(
+            _muted ? Icons.volume_off_outlined : Icons.volume_up_outlined,
+          ),
+        ),
+        IconButton(
           tooltip: 'Pokémon AR tutorial',
-          onPressed: () => showArTutorial(context),
+          onPressed: _tutorial,
           icon: const Icon(Icons.help_outline),
         ),
         IconButton(
@@ -378,6 +477,31 @@ class _StationArScreenState extends State<StationArScreen>
         ARView(
           onARViewCreated: _created,
           planeDetectionConfig: PlaneDetectionConfig.horizontal,
+        ),
+        Center(
+          child: IgnorePointer(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              width: 58,
+              height: 58,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: _focusedId == null
+                      ? Colors.white70
+                      : const Color(0xFFFFDC85),
+                  width: 2,
+                ),
+              ),
+              child: Icon(
+                Icons.add,
+                size: 16,
+                color: _focusedId == null
+                    ? Colors.white70
+                    : const Color(0xFFFFDC85),
+              ),
+            ),
+          ),
         ),
         Align(
           alignment: Alignment.topCenter,
@@ -421,6 +545,14 @@ class _StationArScreenState extends State<StationArScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Text(
+                      _audioError ??
+                          (_focusedId == null
+                              ? 'Center a Pokémon to hear its cry${_muted ? ' • muted' : ''}'
+                              : '${widget.stations.firstWhere((s) => s.id == _focusedId).name}${_muted ? ' • muted' : ' • in focus'}'),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: 6),
                     Text(_status),
                     Wrap(
                       alignment: WrapAlignment.center,

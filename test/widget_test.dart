@@ -13,10 +13,12 @@ void main() {
     await tester.tap(find.text('Continue as guest'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Project 4'), findsOneWidget);
+    expect(find.text('PFT Fieldnotes'), findsOneWidget);
     expect(find.text('Open Camera'), findsOneWidget);
     expect(find.text('Open PFT Map'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Set up Pokémon AR'), 250);
     expect(find.text('Set up Pokémon AR'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Gallery'), 250);
     expect(find.text('Gallery'), findsOneWidget);
     expect(find.text('Photos & videos'), findsOneWidget);
     expect(find.text('Welcome Back, Trainer!'), findsNothing);

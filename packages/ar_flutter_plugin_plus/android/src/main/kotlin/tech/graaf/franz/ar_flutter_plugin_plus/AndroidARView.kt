@@ -218,6 +218,17 @@ internal class AndroidARView(
                                 result.error("Error", "could not get camera pose", null)
                             }
                         }
+                        "getFocusedPokemon" -> {
+                            if (!isSessionResumed) { result.success(null); return }
+                            glSurfaceView.queueEvent {
+                                val frame = currentFrame
+                                if (frame == null || frame.camera.trackingState != TrackingState.TRACKING) {
+                                    activity.runOnUiThread { result.success(null) }
+                                } else {
+                                    modelRenderer.focusedModel { name -> result.success(if (isSessionResumed) name else null) }
+                                }
+                            }
+                        }
                         "getGpsPlacementFrame" -> {
                             if (!isSessionResumed) {
                                 result.success(mapOf("status" to "Waiting for AR camera tracking."))

@@ -1,4 +1,4 @@
-# PFT Explorer — Android testing (1.0.4)
+# PFT Explorer — Android testing (1.0.5)
 
 ## Make Pokémon appear without printables
 
@@ -36,3 +36,21 @@ Automated tests cover map interactions, calibration/inverse projection, compass-
 Phone tests still required: permission denial/retry, location services off, compass interference, floor detection, multiple nearby Pokémon, moving beyond encounter range, background/resume, floor changes, AR photo capture, and on-site placement accuracy. Test all 13 Pokémon. CI/build success does not prove physical GPS/AR performance.
 
 The vendored MIT-licensed AR plugin uses ARCore and Filament; its renderer loops embedded animation clip 0. Models have a maximum rest-pose size of approximately 60 cm. Source notices and model provenance are retained under `assets/pokemon/`. Legacy printable assets remain for historical compatibility but are not used by the current GPS AR flow. iOS AR remains disabled pending native setup and device testing.
+
+## Photobook, Pokémon cries, and sharing (1.0.5)
+
+- The home page is now **PFT Fieldnotes**, with warm paper colors and photo mounts. **Gallery → Photos & videos** is your photobook; the Pokémon tab keeps animated previews and Pokédex details.
+- In **GPS Pokémon AR**, center the viewfinder on a visible Pokémon for roughly one second to hear its game cry. The reticle turns gold and shows its name. This uses the placed AR models, not recognition of real-world objects in the regular camera.
+- All 13 cries are bundled offline. Holding the same Pokémon in focus does not repeat the sound; look away and back to rearm it. Each Pokémon has an eight-second cooldown. Use the speaker button to mute; that preference is saved. Cries stop when leaving AR or putting the app in the background. Media volume controls loudness.
+- Open any saved photo or video and select **Instagram**, **Twitter / X**, or **More apps**. Instagram and X must be installed and accept the media type. The destination composer opens with the file; finish the caption and posting there. No post is sent automatically and the app does not store social passwords. An unavailable destination offers an error; use More apps instead.
+- After a regular-camera capture, the photo-library button opens that capture for editing/sharing. Videos pause before sharing. Edited copies are separate captures: open the edited copy in the photobook to share it.
+- Shares use a temporary copy with a content URI and read permission; gallery originals are unchanged. Temporary exports older than 24 hours are cleaned on the next share. Destination apps impose their own video length/format limits and may choose their own compose flow.
+
+### Phone acceptance checks
+
+1. Focus Bulbasaur, Pikachu, and Charizard in AR; confirm the correct cry, no repeated sound while held, and a new cry after looking away and back past the cooldown.
+2. Verify mute survives reopening AR, and no cry continues after backgrounding, opening the tutorial, or changing floors. Verify overlapping Pokémon select the closest model intersecting the center ray. Bounds-based focus may include a little empty space around an animated model.
+3. Share a camera JPG, an edited/AR PNG, and an MP4 to each installed destination. Confirm the actual media arrives in the composer, cancel once, and return safely to the app. Test an uninstalled destination and More apps. Publishing is a user action, not part of automated tests.
+4. Verify phone portrait/landscape and larger text remain readable, and the normal camera is released while viewing/sharing the latest capture.
+
+Automated tests cover focus dwell/cooldowns, audio container validity, sharing arguments/errors, saved file access, and small-screen layouts. Physical AR alignment, audio output, and receiving-app behavior require device testing.
