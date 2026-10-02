@@ -29,3 +29,14 @@ Automated tests cover configuration persistence, invalid floor/coordinate reject
 The MIT-licensed `ar_flutter_plugin_plus` 1.1.3 package is vendored in `packages/` with its license. The Android Filament render loop is patched to play clip 0 and update bone matrices. The upstream image database assumes a 20 cm image width, which is why print size matters. Native plugin code is excluded from the app's Dart lint scope; Android compilation checks its Kotlin code.
 
 Models were decoded from Draco, converted from WebP to PNG textures, centered at their base, and scaled to a 60 cm maximum rest-pose dimension for this prototype. All source clips are retained. The mobile manifest records converted checksums plus original source checksums. Source licensing notices are included; no commercial Pokémon IP permission is conveyed.
+
+## Gallery and camera update (1.0.1)
+
+- The home screen now has Gallery in place of the old Downloaded Items section.
+- The Pokémon tab includes all 13 bundled Pokémon, with artwork and animated 3D previews. Drag to rotate and pinch to zoom. Previewing models does not require camera access.
+- Photos & videos contains your saved camera and AR photos, edited copies, and camera videos. Tap a photo to view it, then Edit to crop, draw, or apply Original/Mono/Sepia/Bright filters. Save copy preserves the original. Videos have playback and seeking controls.
+- Camera uses the plugin's orientation-aware preview and requests the very-high resolution preset. Switch lenses using the front/back button. Choose Photo or Video; video mode requests microphone access. Stop and save finishes a recording. Leaving the camera or backgrounding the app attempts to stop and save an active recording.
+- Crop handles are at the image corners. Drag a corner to resize, or drag inside to move the crop. Drawing supports colors, brush width, undo, and reset.
+- The AR screen has a camera button to save a composite AR photo once a Pokémon is placed. AR video recording is not part of this update; video recording is in the regular Camera screen.
+- Captures are stored privately inside the app, not uploaded or automatically added to the system Photos app. Updating the APK with the same signature preserves them; uninstalling or clearing app data removes them.
+- Install the new APK over the old version. Verify portrait/landscape preview, both lenses, video audio, background/resume, playback, all editor tools, and AR photo composition on the phone. Camera hardware and WebView rendering still require device testing.

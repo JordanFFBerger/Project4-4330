@@ -231,6 +231,7 @@ internal class AndroidARView(
                                     try {
                                         val mainHandler = Handler(context.mainLooper)
                                         val runnable = Runnable {
+                                          try {
                                             // Composite Filament TextureView on top if available.
                                             filamentTextureView?.let { overlay ->
                                                 if (overlay.isAvailable) {
@@ -247,6 +248,11 @@ internal class AndroidARView(
                                             bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
                                             val data = stream.toByteArray()
                                             result.success(data)
+                                          } catch (e: Exception) {
+                                            result.error("snapshot_failed", e.message, null)
+                                          } finally {
+                                            bitmap.recycle()
+                                          }
                                         }
                                         mainHandler.post(runnable)
                                     } catch (e: IOException) {

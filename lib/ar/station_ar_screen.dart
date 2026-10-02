@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vm;
 
 import 'station_store.dart';
+import '../gallery/media_store.dart';
 
 class StationArScreen extends StatefulWidget {
   const StationArScreen({super.key, required this.stations});
@@ -23,6 +24,34 @@ class _StationArScreenState extends State<StationArScreen> {
   ARObjectManager? _objects;
   ARNode? _node;
   bool _busy = false;
+  bool _savingPhoto = false;
+  Future<void> _takePhoto() async {
+    if (_session == null || _savingPhoto) return;
+    setState(() => _savingPhoto = true);
+    try {
+      final image = await _session!.snapshot();
+      if (image is! MemoryImage) throw StateError('Snapshot unavailable');
+      await MediaStore().savePhoto(image.bytes);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('AR photo saved to Gallery')),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Could not save AR photo. Check available space and retry.',
+            ),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _savingPhoto = false);
+    }
+  }
+
   String _status = 'Starting AR. Allow camera access when prompted.';
   void _message(String text) {
     if (mounted) setState(() => _status = text);
@@ -117,7 +146,16 @@ class _StationArScreenState extends State<StationArScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Pokémon AR')),
+    appBar: AppBar(
+      title: const Text('Pokémon AR'),
+      actions: [
+        IconButton(
+          tooltip: 'Save AR photo',
+          onPressed: _savingPhoto || _node == null ? null : _takePhoto,
+          icon: const Icon(Icons.camera_alt),
+        ),
+      ],
+    ),
     body: Stack(
       children: [
         ARView(
